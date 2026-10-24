@@ -35,7 +35,7 @@
     "started_at": 1792865789.8576243,
     "finished_at": 1792865935.4170704,
     "strikes": 0,
-    "reviewer": "six-model panel round 2: evren, evren2, evren3, evren4, evren5, kilo-free",
+    "reviewer": "kilo-free (Nemotron 3.5 Super VL) final verification pass; evren2 and evren5 blocked by provider daily token limits; evren4 cancelled; evren and evren3 completed round 1",
     "allowed_removals": [],
     "final_snapshot_digest": "a6f889194855cb823648b4ad2f1b2abdf4d2863fd632e5588b3b8dc859dd5e9f",
     "final_snapshot_entries": 53,
