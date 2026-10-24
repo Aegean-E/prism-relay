@@ -1,0 +1,15 @@
+{
+  "name": "prism-relay",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A neon laser-mirror puzzle game: rotate prisms, split beams, and recharge the grid across handcrafted levels.",
+  "scripts": {
+    "start": "node scripts/serve.mjs",
+    "test": "node --test tests",
+    "ui:snapshot": "node scripts/ui-inventory.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

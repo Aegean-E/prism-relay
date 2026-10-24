@@ -1,0 +1,117 @@
+export const LEVELS = Object.freeze([
+  Object.freeze({
+    id: "first-light",
+    name: "First Light",
+    chapter: "01",
+    subtitle: "Wake the receiver with a single reflection.",
+    par: 1,
+    rows: Object.freeze([
+      ".......",
+      "...T...",
+      ".......",
+      ">..\\...",
+      ".......",
+      ".......",
+      ".......",
+    ]),
+  }),
+  Object.freeze({
+    id: "split-decision",
+    name: "Split Decision",
+    chapter: "02",
+    subtitle: "A prism divides the signal. Send both halves home.",
+    par: 2,
+    rows: Object.freeze([
+      "........",
+      "........",
+      "....\\.T.",
+      "........",
+      ">...*...",
+      "........",
+      "..../.T.",
+      "........",
+    ]),
+  }),
+  Object.freeze({
+    id: "mirror-maze",
+    name: "Mirror Maze",
+    chapter: "03",
+    subtitle: "Three branches, three choices, one clean circuit.",
+    par: 3,
+    rows: Object.freeze([
+      ".........",
+      "......T..",
+      "..\\....T.",
+      ".........",
+      ">.*...\\..",
+      ".........",
+      "../....T.",
+      ".........",
+      ".........",
+    ]),
+  }),
+  Object.freeze({
+    id: "switchback",
+    name: "Switchback",
+    chapter: "04",
+    subtitle: "Thread the beam through the service corridors.",
+    par: 3,
+    rows: Object.freeze([
+      "v.......#",
+      ".........",
+      "/...../..",
+      "...T#....",
+      "....#....",
+      "....#....",
+      ".T.*..\\..",
+      "....#....",
+      "........#",
+    ]),
+  }),
+  Object.freeze({
+    id: "crossfire",
+    name: "Crossfire",
+    chapter: "05",
+    subtitle: "Two emitters. Six receivers. One shared lattice of light.",
+    par: 4,
+    rows: Object.freeze([
+      "..T...T..",
+      ">.*...\\..",
+      ".........",
+      ".........",
+      "T.\\...\\.T",
+      ".........",
+      ".........",
+      "..\\...*.<",
+      "..T...T..",
+    ]),
+  }),
+  Object.freeze({
+    id: "the-vault",
+    name: "The Vault",
+    chapter: "06",
+    subtitle: "Every prism is listening. Close the relay.",
+    par: 6,
+    rows: Object.freeze([
+      "....T......",
+      "...........",
+      "..\\.\\.\\...T",
+      "...........",
+      "....#......",
+      ">.*...*...T",
+      "....#......",
+      "...........",
+      "../././...T",
+      "...........",
+      "....T......",
+    ]),
+  }),
+]);
+
+export function levelById(id) {
+  return LEVELS.find((level) => level.id === id) ?? null;
+}
+
+export function firstLevel() {
+  return LEVELS[0];
+}

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Prism Relay is a neon light-routing puzzle game. Rotate mirrors, split beams through prisms, and charge every receiver.">
+    <title>Prism Relay — a light-routing puzzle</title>
+    <link rel="stylesheet" href="./src/theme.css">
+    <link rel="stylesheet" href="./src/styles.css">
+  </head>
+  <body>
+    <div class="ambient" aria-hidden="true">
+      <span class="ambient__orb ambient__orb--one"></span>
+      <span class="ambient__orb ambient__orb--two"></span>
+      <span class="ambient__orb ambient__orb--three"></span>
+    </div>
+
+    <div class="app-shell">
+      <header class="topbar">
+        <button class="brand" data-ui="brand-home" aria-label="Prism Relay home">
+          <span class="brand__mark" aria-hidden="true"></span>
+          <span class="brand__word">PRISM <span>RELAY</span></span>
+        </button>
+        <div class="topbar__meta">
+          <span class="topbar__chapter" data-cue="topbar-status">LIGHT ROUTING / 06 CHAMBERS</span>
+          <button class="icon-button" data-ui="sound-toggle" aria-label="Mute sound" aria-pressed="false">
+            <span class="icon icon--sound" aria-hidden="true"></span>
+          </button>
+          <button class="ghost-button" data-ui="open-howto">How to play</button>
+        </div>
+      </header>
+
+      <main class="stage">
+        <section class="screen screen--title" id="screen-title" data-ui="screen-title" data-panel="screen-title">
+          <div class="title-copy">
+            <p class="eyebrow"><span class="eyebrow__line" aria-hidden="true"></span> A light-routing puzzle</p>
+            <h1>Bend the light.<br><em>Close the relay.</em></h1>
+            <p class="lede">Rotate mirrors, split beams through prisms, and charge every receiver. Six chambers. One perfect circuit.</p>
+            <div class="title-actions">
+              <button class="button button--primary" data-ui="start-game">
+                Enter the relay <span aria-hidden="true">→</span>
+              </button>
+              <button class="button button--quiet" data-ui="open-chambers">Chamber index</button>
+            </div>
+            <dl class="title-stats">
+              <div>
+                <dt>Chambers</dt>
+                <dd>06</dd>
+              </div>
+              <div>
+                <dt>Stars</dt>
+                <dd id="title-stars">00</dd>
+              </div>
+              <div>
+                <dt>Best run</dt>
+                <dd id="title-best">—</dd>
+              </div>
+            </dl>
+          </div>
+          <div class="title-art" aria-hidden="true">
+            <div class="prism-orbit prism-orbit--a"></div>
+            <div class="prism-orbit prism-orbit--b"></div>
+            <div class="prism-orbit prism-orbit--c"></div>
+            <svg class="prism-graphic" viewBox="0 0 520 520" role="presentation">
+              <defs>
+                <linearGradient id="prism-gradient" x1="0" y1="0" x2="1" y2="1">
+                  <stop class="grad-stop-cyan" offset="0"></stop>
+                  <stop class="grad-stop-magenta" offset="1"></stop>
+                </linearGradient>
+              </defs>
+              <path class="hero-beam hero-beam--cyan" d="M20 260 H210 L260 180 L310 340 L360 260 H500"></path>
+              <path class="hero-beam hero-beam--magenta" d="M260 20 V180 L210 260 L310 260 L360 260 V500"></path>
+              <circle class="hero-ring" cx="260" cy="260" r="168"></circle>
+              <circle class="hero-ring hero-ring--inner" cx="260" cy="260" r="112"></circle>
+              <path class="hero-prism" d="M260 168 L344 318 H176 Z"></path>
+            </svg>
+            <div class="prism-core"><span></span></div>
+            <p class="art-caption">Signal integrity <strong>100%</strong></p>
+          </div>
+        </section>
+
+        <section class="screen screen--chambers" id="screen-chambers" data-ui="screen-chambers" data-panel="screen-chambers" hidden>
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Chamber index</p>
+              <h2>Choose a circuit</h2>
+            </div>
+            <button class="ghost-button" data-ui="back-to-title">← Back</button>
+          </div>
+          <div class="chamber-progress">
+            <span class="chamber-progress__label">Relay calibration</span>
+            <div class="progress-track" aria-hidden="true"><span id="chamber-progress-fill"></span></div>
+            <span class="chamber-progress__value" id="chamber-progress-value" data-cue="chamber-progress">0 / 6 chambers</span>
+          </div>
+          <div class="chamber-grid" id="chamber-grid" data-ui="chamber-grid" data-panel="chamber-grid" role="list"></div>
+        </section>
+
+        <section class="screen screen--game" id="screen-game" data-ui="screen-game" data-panel="screen-game" hidden>
+          <div class="game-head">
+            <div class="game-head__id">
+              <button class="icon-button" data-ui="game-back" aria-label="Back to chamber index">←</button>
+              <div>
+                <p class="eyebrow" id="game-chapter" data-cue="game-chapter">Chamber 01</p>
+                <h2 id="game-title">First Light</h2>
+              </div>
+            </div>
+            <div class="game-metrics">
+              <div class="metric">
+                <span>Moves</span>
+                <strong id="hud-moves" data-ui="hud-moves">0</strong>
+                <em>/ <span id="hud-par" data-cue="hud-par">1</span> par</em>
+              </div>
+              <div class="metric">
+                <span>Relays</span>
+                <strong id="hud-relays" data-ui="hud-relays">0/1</strong>
+              </div>
+              <button class="icon-button" data-ui="reset-level" aria-label="Reset chamber">↺</button>
+              <button class="icon-button" data-ui="pause-game" aria-label="Pause chamber">Ⅱ</button>
+            </div>
+          </div>
+
+          <div class="game-layout">
+            <div class="board-frame">
+              <div class="board" id="board" data-ui="board" data-panel="board" role="grid" aria-label="Laser puzzle board"></div>
+              <svg class="beam-layer" id="beam-layer" aria-hidden="true"></svg>
+              <div class="board-corner board-corner--tl" aria-hidden="true"></div>
+              <div class="board-corner board-corner--tr" aria-hidden="true"></div>
+              <div class="board-corner board-corner--bl" aria-hidden="true"></div>
+              <div class="board-corner board-corner--br" aria-hidden="true"></div>
+            </div>
+
+            <aside class="game-side">
+              <p class="eyebrow">Objective</p>
+              <h3 id="game-subtitle" data-cue="game-subtitle">Wake the receiver with a single reflection.</h3>
+              <p class="game-side__copy">Click a mirror to rotate it. Route light into every receiver using as few moves as possible.</p>
+              <div class="legend">
+                <div class="legend__item"><span class="legend__glyph legend__glyph--mirror" aria-hidden="true"></span><span>Mirror<em>click to rotate</em></span></div>
+                <div class="legend__item"><span class="legend__glyph legend__glyph--prism" aria-hidden="true"></span><span>Prism<em>splits light</em></span></div>
+                <div class="legend__item"><span class="legend__glyph legend__glyph--receiver" aria-hidden="true"></span><span>Receiver<em>charge all</em></span></div>
+              </div>
+              <div class="game-side__rule"></div>
+              <p class="game-side__hint" id="game-hint" data-ui="game-hint" data-cue="game-hint">Tip: beams reflect off both mirror faces.</p>
+              <button class="button button--quiet" data-ui="restart-level-side">Restart chamber</button>
+            </aside>
+          </div>
+
+          <div class="game-foot">
+            <p id="status-line" data-ui="status-line" data-cue="status-line">Rotate a mirror to begin.</p>
+            <p>Arrow keys move · Space rotates · R resets · Esc pauses</p>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <span>PRISM RELAY</span>
+        <span>Built with AIKit</span>
+        <span data-cue="footer-note">No install. No network. Pure light.</span>
+      </footer>
+    </div>
+
+    <dialog class="modal" id="modal" data-ui="modal" data-panel="modal">
+      <div class="modal__glow" aria-hidden="true"></div>
+      <button class="icon-button modal__close" data-ui="modal-close" aria-label="Close dialog">×</button>
+      <div class="modal__content">
+        <p class="eyebrow" id="modal-kicker" data-cue="modal-kicker">Transmission</p>
+        <h2 id="modal-title" data-ui="modal-title">Message</h2>
+        <div class="stars" id="modal-stars" aria-label="Star rating"></div>
+        <p id="modal-body" data-ui="modal-body"></p>
+        <div class="modal__actions">
+          <button class="button button--primary" id="modal-primary" data-ui="modal-primary">Continue</button>
+          <button class="button button--quiet" id="modal-secondary" data-ui="modal-secondary">Close</button>
+          <button class="button button--quiet" id="modal-tertiary" data-ui="modal-tertiary" hidden>Back</button>
+        </div>
+      </div>
+    </dialog>
+
+    <script type="module" src="./src/ui/app.js"></script>
+  </body>
+</html>

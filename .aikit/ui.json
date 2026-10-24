@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "surfaces": {
+    "app": {
+      "paths": [
+        "index.html",
+        "src/**"
+      ]
+    }
+  },
+  "protected": [
+    "tests/**",
+    "scripts/**",
+    ".aikit/**",
+    "README.md",
+    "package.json",
+    "package-lock.json",
+    "LICENSE",
+    ".gitignore",
+    "src/**/*.test.*",
+    "src/**/*.spec.*",
+    "src/**/__tests__/**"
+  ],
+  "commands": {
+    "fast": "node --test tests",
+    "snapshot": "node scripts/ui-inventory.mjs"
+  },
+  "style": {
+    "theme_paths": [
+      "src/theme.css"
+    ]
+  },
+  "limits": {
+    "max_files": 12,
+    "max_lines": 2400
+  }
+}
