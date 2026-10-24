@@ -241,7 +241,7 @@ dd {
   justify-content: center;
   gap: var(--space-2);
   padding: 0 var(--space-5);
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-ui);
   border-radius: var(--radius-round);
   background: transparent;
   color: var(--paper);
@@ -430,7 +430,7 @@ dd {
   align-items: center;
   justify-content: center;
   padding: 0 var(--space-4);
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-ui);
   border-radius: var(--radius-round);
   background: var(--glass-soft);
   color: var(--paper-soft);
@@ -458,7 +458,7 @@ dd {
   gap: var(--space-4);
   margin-bottom: var(--space-5);
   padding: var(--space-4) var(--space-5);
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-ui);
   border-radius: var(--radius-md);
   background: var(--glass);
   backdrop-filter: blur(18px);
@@ -490,7 +490,7 @@ dd {
   align-items: flex-start;
   padding: var(--space-5);
   overflow: hidden;
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-ui);
   border-radius: var(--radius-md);
   background:
     radial-gradient(120% 100% at 100% 0, var(--accent-soft), transparent 58%),
@@ -599,8 +599,8 @@ dd {
 
 .chamber-card.is-locked {
   cursor: not-allowed;
-  filter: saturate(0.25);
-  opacity: 0.48;
+  filter: saturate(0.35);
+  opacity: 0.62;
 }
 
 .chamber-card.is-locked:hover {
@@ -664,7 +664,7 @@ dd {
   align-items: center;
   justify-content: center;
   padding: 0;
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-ui);
   border-radius: var(--radius-round);
   background: var(--glass-soft);
   color: var(--paper-soft);
@@ -733,7 +733,7 @@ dd {
   align-items: center;
   gap: var(--space-4);
   padding: var(--space-2) var(--space-3);
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-ui);
   border-radius: var(--radius-round);
   background: var(--glass);
   backdrop-filter: blur(18px);
@@ -1144,7 +1144,7 @@ dd {
   flex-direction: column;
   gap: var(--space-4);
   padding: var(--space-5);
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-ui);
   border-radius: var(--radius-md);
   background:
     radial-gradient(120% 90% at 100% 0, var(--accent-soft), transparent 58%),
