@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "name": "prism-relay",
+  "test_command": "node --test tests",
+  "topics": [
+    "aikit",
+    "game",
+    "puzzle",
+    "web"
+  ],
+  "gates": {},
+  "ui_required": false,
+  "created": "2026-10-24"
+}
