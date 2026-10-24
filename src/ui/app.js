@@ -91,6 +91,12 @@ function showScreen(name) {
   }
   updateTopbarStatus();
   updateSoundButton();
+  const screen = screens.get(name);
+  const heading = screen?.querySelector("h1, h2");
+  if (heading) {
+    heading.setAttribute("tabindex", "-1");
+    heading.focus({ preventScroll: true });
+  }
   if (name !== "game") {
     closeModal();
   }
@@ -266,6 +272,9 @@ function renderBoard() {
       elements.board.append(node);
     }
   }
+  state.mirrorCells.forEach((mirror, index) => {
+    mirror.element.tabIndex = index === 0 ? 0 : -1;
+  });
 }
 
 function buildPiece(cell) {
@@ -385,9 +394,9 @@ function updateGameView() {
   } else if (lit === 0) {
     elements.statusLine.textContent = "No signal yet. Rotate a mirror into the beam.";
   } else if (lit < total) {
-    elements.statusLine.textContent = `${lit} of ${total} relays charged.`;
+    elements.statusLine.textContent = `${lit} of ${total} receivers charged.`;
   } else {
-    elements.statusLine.textContent = "All relays charged. Hold the circuit.";
+    elements.statusLine.textContent = "All receivers charged. Hold the circuit.";
   }
 }
 
@@ -474,7 +483,15 @@ function moveMirrorFocus(active, key) {
       }
       return dx !== 0 ? Math.abs(a.y - y) - Math.abs(b.y - y) : Math.abs(a.x - x) - Math.abs(b.x - x);
     });
-  candidates[0]?.element.focus();
+  const target = candidates[0];
+  if (!target) {
+    return;
+  }
+  for (const mirror of state.mirrorCells) {
+    mirror.element.tabIndex = -1;
+  }
+  target.element.tabIndex = 0;
+  target.element.focus();
 }
 
 function rotateMirror(x, y, element) {
@@ -490,6 +507,9 @@ function rotateMirror(x, y, element) {
   const changed = rotateSessionCell(state.session, x, y);
   if (!changed) {
     return;
+  }
+  for (const mirror of state.mirrorCells) {
+    mirror.element.tabIndex = mirror.element === element ? 0 : -1;
   }
   audio.playRotate();
   element.classList.remove("is-turning");
@@ -550,6 +570,8 @@ function openModal({ kind, kicker, title, stars = null, bodyHtml, primary, secon
   if (!elements.modal.open) {
     elements.modal.showModal();
   }
+  const focusTarget = elements.modalPrimary.hidden ? elements.modalClose : elements.modalPrimary;
+  focusTarget?.focus({ preventScroll: true });
 }
 
 function closeModal() {
@@ -561,7 +583,7 @@ function closeModal() {
 function openHowToModal() {
   const fromGame = state.screen === "game" && state.session;
   const startAction = {
-    label: fromGame ? "Back to the chamber" : "Enter the relay",
+    label: fromGame ? "Return to chamber" : "Enter the relay",
     run: () => {
       if (fromGame) {
         return;
@@ -591,7 +613,7 @@ function openHowToModal() {
       <p class="modal__fine">Keyboard: arrows move focus, space rotates, R restarts, M toggles sound, Esc pauses.</p>
     `,
     primary: startAction,
-    secondary: { label: "Close", run: () => {} },
+    secondary: fromGame ? null : { label: "Close", run: () => {} },
   });
 }
 
@@ -773,7 +795,6 @@ function bindEvents() {
     state.modalOpen = false;
     state.modalKind = null;
     state.paused = false;
-    elements.modalPrimary?.blur();
   });
   window.addEventListener("keydown", handleGlobalKeydown);
 }

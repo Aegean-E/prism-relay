@@ -163,6 +163,11 @@ dd {
   animation: screen-in var(--speed-slow) var(--ease-out) both;
 }
 
+.screen h1:focus,
+.screen h2:focus {
+  outline: none;
+}
+
 .screen--title {
   display: grid;
   min-height: calc(100vh - 172px);
@@ -859,6 +864,14 @@ dd {
   stroke: var(--beam-lime);
 }
 
+.beam--1.beam--halo {
+  stroke-dasharray: 0.36 0.16;
+}
+
+.beam--2.beam--halo {
+  stroke-dasharray: 0.08 0.2;
+}
+
 .beam--core {
   animation: beam-flow 1.35s linear infinite;
   stroke: var(--beam-white);
@@ -1189,6 +1202,10 @@ dd {
   background: var(--ink-800);
 }
 
+.legend__glyph--mirror {
+  border-radius: var(--radius-round);
+}
+
 .legend__glyph--mirror::before {
   width: 22px;
   height: 2px;
@@ -1196,6 +1213,14 @@ dd {
   background: var(--paper-soft);
   content: "";
   transform: rotate(45deg);
+}
+
+.legend__glyph--mirror::after {
+  position: absolute;
+  inset: 8px;
+  border: 1px dashed var(--line);
+  border-radius: var(--radius-round);
+  content: "";
 }
 
 .legend__glyph--prism::before {
@@ -1209,9 +1234,8 @@ dd {
 .legend__glyph--receiver::before {
   width: 19px;
   height: 19px;
-  border: 2px solid var(--beam-cyan);
+  border: 2px solid var(--line-strong);
   border-radius: var(--radius-round);
-  box-shadow: 0 0 12px var(--beam-cyan-soft);
   content: "";
 }
 
@@ -1682,5 +1706,37 @@ dd {
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 1ms !important;
+  }
+}
+
+@media (pointer: coarse) {
+  .button,
+  .icon-button,
+  .ghost-button {
+    min-height: 44px;
+  }
+
+  .icon-button {
+    min-width: 44px;
+  }
+
+  .ghost-button {
+    min-width: 44px;
+  }
+}
+
+@media (forced-colors: active) {
+  .title-copy h1 em {
+    background: none;
+    color: CanvasText;
+    -webkit-text-fill-color: CanvasText;
+  }
+
+  .beam--core {
+    stroke: Highlight;
+  }
+
+  .cell--receiver.is-lit .piece--receiver {
+    border-color: Highlight;
   }
 }

@@ -12,5 +12,19 @@
     "final_snapshot_digest": "a6f889194855cb823648b4ad2f1b2abdf4d2863fd632e5588b3b8dc859dd5e9f",
     "final_snapshot_entries": 53,
     "surface_digest": "faeaf46212954cb56f19a634f2391f4b57399bdfd6b21e5f0470d85273b13647"
+  },
+  {
+    "schema": 1,
+    "surface": "app",
+    "baseline_commit": "3a486d238818b071ae8022a4d1c864adf7f5cb33",
+    "contract_hash": "b850775accfa2201bec633a5a2ed0738e97709f8d3318f65c07bc3ca6e39739a",
+    "started_at": 1792865319.5459242,
+    "finished_at": 1792865641.344122,
+    "strikes": 0,
+    "reviewer": "evren (Deepseek-V4.1-Flash), evren3 (gemma-4-31b), kilo-free (Nemotron 3.5 Super VL)",
+    "allowed_removals": [],
+    "final_snapshot_digest": "a6f889194855cb823648b4ad2f1b2abdf4d2863fd632e5588b3b8dc859dd5e9f",
+    "final_snapshot_entries": 53,
+    "surface_digest": "b7409eb48a8a776c68ac47b2cbd7f8503e19a3fdd171463d2dd1dde49a19312f"
   }
 ]
