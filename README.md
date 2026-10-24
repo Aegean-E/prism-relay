@@ -78,6 +78,7 @@ prism-relay/
 └── tests/
     ├── engine.test.js         <- physics, cycles, session, solver-backed pars
     ├── progress.test.js       <- corrupt state, best result, unlock, sound
+    ├── server.test.js         <- static path containment and traversal refusal
     └── ui.test.js             <- screen, control and manifest contract
 ```
 

@@ -1,7 +1,7 @@
 import { createServer } from "node:http";
 import { readFile, stat } from "node:fs/promises";
-import { extname, join, normalize, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { extname, join, normalize, resolve, sep } from "node:path";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const portArg = process.argv.indexOf("--port");
@@ -16,10 +16,16 @@ const types = {
   ".ico": "image/x-icon",
 };
 
-function safePath(urlPath) {
-  const clean = decodeURIComponent(urlPath.split("?")[0]);
-  const candidate = normalize(join(root, clean === "/" ? "index.html" : clean));
-  return candidate.startsWith(root) ? candidate : null;
+export function safePath(urlPath = "/", base = root) {
+  let clean;
+  try {
+    clean = decodeURIComponent(urlPath.split("?")[0]);
+  } catch {
+    return null;
+  }
+  const relative = clean === "/" || clean === "" ? "index.html" : clean.replace(/^[/\\]+/, "");
+  const candidate = normalize(join(base, relative));
+  return candidate === base || candidate.startsWith(`${base}${sep}`) ? candidate : null;
 }
 
 const server = createServer(async (request, response) => {
@@ -42,6 +48,11 @@ const server = createServer(async (request, response) => {
   }
 });
 
-server.listen(port, "127.0.0.1", () => {
-  console.log(`Prism Relay running at http://127.0.0.1:${port}/`);
-});
+const isMain =
+  Boolean(process.argv[1]) && import.meta.url === pathToFileURL(resolve(process.argv[1])).href;
+
+if (isMain) {
+  server.listen(port, "127.0.0.1", () => {
+    console.log(`Prism Relay running at http://127.0.0.1:${port}/`);
+  });
+}
