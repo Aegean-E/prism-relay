@@ -3,12 +3,19 @@
   "active_task": {
     "task_id": "build-prism-relay",
     "last_phase": "phase 4",
-    "active_phase": 4,
-    "status": "in_progress",
+    "active_phase": 5,
+    "status": "completed",
     "updated_at": 1792865944.33673,
     "owner": "unidentified",
     "started_by": null,
-    "continuations": []
+    "continuations": [
+      {
+        "agent": "kilo:main",
+        "from": "unidentified",
+        "at": 1792866017.2923176
+      }
+    ],
+    "completed_at": 1792866017.2923188
   },
   "checkpoints": [
     {
@@ -90,6 +97,17 @@
         "next": "commit final polish, run strict check, complete task",
         "evidence": "title/chambers/game at 1440 and 320/390, no horizontal overflow, model panel round 1 findings applied"
       }
+    },
+    {
+      "task_id": "build-prism-relay",
+      "phase": "completed",
+      "phase_num": 5,
+      "description": "Task 'build-prism-relay' completed successfully.",
+      "status": "completed",
+      "timestamp": 1792866017.2923198,
+      "timestamp_str": "2026-10-24 21:20:17",
+      "agent": "kilo:main",
+      "continued_from": "unidentified"
     }
   ]
 }

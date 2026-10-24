@@ -116,7 +116,7 @@ The app accepts development-only query parameters so every state can be captured
 | `/?level=mirror-maze&preview=pause` | Pause dialog |
 | `/?level=mirror-maze&preview=victory` | Three-star victory dialog |
 
-Screenshots are reviewed by six independent providers through subagents before the final UI commit.
+Screenshots are reviewed by independent model-provider subagents before the final UI commit; a vision-capable reviewer verifies the final pass. Screenshot files and the review brief live in the local, git-ignored `.review/` folder.
 
 ## License
 
