@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Prism Relay is a neon light-routing puzzle game. Rotate mirrors, split beams through prisms, and charge every receiver.">
     <title>Prism Relay — a light-routing puzzle</title>
+    <link rel="icon" href="data:,">
     <link rel="stylesheet" href="./src/theme.css">
     <link rel="stylesheet" href="./src/styles.css">
   </head>
@@ -26,7 +27,7 @@
           <button class="icon-button" data-ui="sound-toggle" aria-label="Mute sound" aria-pressed="false">
             <span class="icon icon--sound" aria-hidden="true"></span>
           </button>
-          <button class="ghost-button" data-ui="open-howto">How to play</button>
+          <button class="ghost-button" data-ui="open-howto" aria-label="How to play"><span class="howto-label">How to play</span><span class="howto-compact" aria-hidden="true">?</span></button>
         </div>
       </header>
 
@@ -89,7 +90,7 @@
           </div>
           <div class="chamber-progress">
             <span class="chamber-progress__label">Relay calibration</span>
-            <div class="progress-track" aria-hidden="true"><span id="chamber-progress-fill"></span></div>
+            <div class="progress-track" id="chamber-progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0" aria-label="Chambers completed"><span id="chamber-progress-fill"></span></div>
             <span class="chamber-progress__value" id="chamber-progress-value" data-cue="chamber-progress">0 / 6 chambers</span>
           </div>
           <div class="chamber-grid" id="chamber-grid" data-ui="chamber-grid" data-panel="chamber-grid" role="list"></div>
@@ -120,8 +121,8 @@
           </div>
 
           <div class="game-layout">
-            <div class="board-frame">
-              <div class="board" id="board" data-ui="board" data-panel="board" role="grid" aria-label="Laser puzzle board"></div>
+            <div class="board-frame" id="board-frame">
+              <div class="board" id="board" data-ui="board" data-panel="board" role="group" aria-label="Laser puzzle board"></div>
               <svg class="beam-layer" id="beam-layer" aria-hidden="true"></svg>
               <div class="board-corner board-corner--tl" aria-hidden="true"></div>
               <div class="board-corner board-corner--tr" aria-hidden="true"></div>
@@ -145,7 +146,7 @@
           </div>
 
           <div class="game-foot">
-            <p id="status-line" data-ui="status-line" data-cue="status-line">Rotate a mirror to begin.</p>
+            <p id="status-line" data-ui="status-line" data-cue="status-line" aria-live="polite">Rotate a mirror to begin.</p>
             <p>Arrow keys move · Space rotates · R resets · Esc pauses</p>
           </div>
         </section>
@@ -158,7 +159,7 @@
       </footer>
     </div>
 
-    <dialog class="modal" id="modal" data-ui="modal" data-panel="modal">
+    <dialog class="modal" id="modal" data-ui="modal" data-panel="modal" aria-labelledby="modal-title" aria-describedby="modal-body">
       <div class="modal__glow" aria-hidden="true"></div>
       <button class="icon-button modal__close" data-ui="modal-close" aria-label="Close dialog">×</button>
       <div class="modal__content">
