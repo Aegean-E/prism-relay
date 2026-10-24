@@ -3,12 +3,19 @@
   "active_task": {
     "task_id": "delivery-harden",
     "last_phase": "phase 3",
-    "active_phase": 3,
-    "status": "in_progress",
+    "active_phase": 5,
+    "status": "completed",
     "updated_at": 1792867325.6170702,
     "owner": "unidentified",
     "started_by": "unidentified",
-    "continuations": []
+    "continuations": [
+      {
+        "agent": "kilo:main",
+        "from": "unidentified",
+        "at": 1792867415.5639346
+      }
+    ],
+    "completed_at": 1792867415.5639355
   },
   "checkpoints": [
     {
@@ -135,6 +142,17 @@
       "handoff": {
         "next": "commit server hardening and provenance correction separately, verify HEAD in a clean worktree, then publish privately and push"
       }
+    },
+    {
+      "task_id": "delivery-harden",
+      "phase": "completed",
+      "phase_num": 5,
+      "description": "Task 'delivery-harden' completed successfully.",
+      "status": "completed",
+      "timestamp": 1792867415.5639365,
+      "timestamp_str": "2026-10-24 21:43:35",
+      "agent": "kilo:main",
+      "continued_from": "unidentified"
     }
   ]
 }
