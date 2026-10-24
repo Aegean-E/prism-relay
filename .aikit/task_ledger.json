@@ -1,21 +1,14 @@
 {
   "version": 1,
   "active_task": {
-    "task_id": "build-prism-relay",
-    "last_phase": "phase 4",
-    "active_phase": 5,
-    "status": "completed",
-    "updated_at": 1792865944.33673,
+    "task_id": "delivery-harden",
+    "last_phase": "phase 3",
+    "active_phase": 3,
+    "status": "in_progress",
+    "updated_at": 1792867325.6170702,
     "owner": "unidentified",
-    "started_by": null,
-    "continuations": [
-      {
-        "agent": "kilo:main",
-        "from": "unidentified",
-        "at": 1792866017.2923176
-      }
-    ],
-    "completed_at": 1792866017.2923188
+    "started_by": "unidentified",
+    "continuations": []
   },
   "checkpoints": [
     {
@@ -108,6 +101,40 @@
       "timestamp_str": "2026-10-24 21:20:17",
       "agent": "kilo:main",
       "continued_from": "unidentified"
+    },
+    {
+      "task_id": "delivery-harden",
+      "phase": "phase 2",
+      "phase_num": 2,
+      "description": "[1/1] Plan: contain static server paths and correct UI review provenance before publish",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1792867171.9978867,
+      "timestamp_str": "2026-10-24 21:39:31",
+      "agent": "unidentified",
+      "impact_assessment": {
+        "why": "Pre-push analysis found that the dev server's prefix containment check could admit a sibling directory whose name starts with the project folder, and one UI history reviewer field overstated which providers completed the final round.",
+        "benefits": "Static serving is strictly confined to the project root, the regression is covered by a fast test, and the committed review evidence matches what actually happened.",
+        "risks": "contract: no gameplay or visual change; dependency: none, Node standard library only; concurrency: none; state: ui_history reviewer field corrected in place",
+        "mitigation": "Export the path resolver behind a main-module guard, cover traversal and sibling-prefix cases, correct the record, rerun all project gates and clean-worktree checks, then publish."
+      },
+      "handoff": {
+        "next": "edit serve.mjs, add tests/server.test.js, update README tree and ui_history provenance, verify, commit, publish"
+      }
+    },
+    {
+      "task_id": "delivery-harden",
+      "phase": "phase 3",
+      "phase_num": 3,
+      "description": "[1/1] Static server now contains requests to the project root with unit coverage for traversal, sibling-prefix and malformed escapes; review provenance corrected; 32 tests pass; checklists: passed",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1792867325.6170702,
+      "timestamp_str": "2026-10-24 21:42:05",
+      "agent": "unidentified",
+      "handoff": {
+        "next": "commit server hardening and provenance correction separately, verify HEAD in a clean worktree, then publish privately and push"
+      }
     }
   ]
 }
