@@ -12,21 +12,21 @@ function popcount(value) {
 
 export function solveLevel(level) {
   const board = parseLevel(level);
-  const mirrorCount = board.mirrors.length;
-  if (mirrorCount > 20) {
-    throw new Error("Levels with more than 20 mirrors need a different solver.");
+  const rotatableCount = board.rotatables.length;
+  if (rotatableCount > 20) {
+    throw new Error("Levels with more than 20 rotatable pieces need a different solver.");
   }
-  const initialMask = board.mirrors.reduce(
-    (mask, mirror, index) => mask | (mirror.orientation << index),
+  const initialMask = board.rotatables.reduce(
+    (mask, piece, index) => mask | (piece.orientation << index),
     0,
   );
-  const total = 1 << mirrorCount;
+  const total = 1 << rotatableCount;
   let best = null;
   let examined = 0;
 
   for (let mask = 0; mask < total; mask += 1) {
-    for (let index = 0; index < mirrorCount; index += 1) {
-      board.mirrors[index].orientation = (mask >> index) & 1;
+    for (let index = 0; index < rotatableCount; index += 1) {
+      board.rotatables[index].orientation = (mask >> index) & 1;
     }
     examined += 1;
     const trace = traceBeams(board);
@@ -37,14 +37,14 @@ export function solveLevel(level) {
     if (best === null || moves < best.moves) {
       best = {
         moves,
-        orientations: board.mirrors.map((mirror) => mirror.orientation),
+        orientations: board.rotatables.map((piece) => piece.orientation),
         sameAsInitial: moves === 0,
       };
     }
   }
 
-  for (let index = 0; index < mirrorCount; index += 1) {
-    board.mirrors[index].orientation = (initialMask >> index) & 1;
+  for (let index = 0; index < rotatableCount; index += 1) {
+    board.rotatables[index].orientation = (initialMask >> index) & 1;
   }
 
   return best === null ? null : { ...best, examined };
@@ -52,11 +52,11 @@ export function solveLevel(level) {
 
 export function applySolution(level, orientations) {
   const board = parseLevel(level);
-  if (orientations.length !== board.mirrors.length) {
-    throw new Error("The solution does not cover every mirror.");
+  if (orientations.length !== board.rotatables.length) {
+    throw new Error("The solution does not cover every rotatable piece.");
   }
-  board.mirrors.forEach((mirror, index) => {
-    mirror.orientation = orientations[index];
+  board.rotatables.forEach((piece, index) => {
+    piece.orientation = orientations[index];
   });
   return traceBeams(board);
 }

@@ -32,16 +32,19 @@ export function parseLevel(level) {
 
   const cells = [];
   const mirrors = [];
+  const splitters = [];
   const emitters = [];
   const receivers = [];
   const prisms = [];
+  const portals = [];
   const walls = [];
+  const rotatables = [];
 
   for (let y = 0; y < height; y += 1) {
     const row = [];
     for (let x = 0; x < width; x += 1) {
       const glyph = level.rows[y][x];
-      const cell = { x, y, kind: "floor", orientation: 0, direction: null };
+      const cell = { x, y, kind: "floor", orientation: 0, direction: null, pair: null };
       if (glyph === "#") {
         cell.kind = "wall";
         walls.push(cell);
@@ -49,10 +52,22 @@ export function parseLevel(level) {
         cell.kind = "mirror";
         cell.orientation = 0;
         mirrors.push(cell);
+        rotatables.push(cell);
       } else if (glyph === "\\") {
         cell.kind = "mirror";
         cell.orientation = 1;
         mirrors.push(cell);
+        rotatables.push(cell);
+      } else if (glyph === "S") {
+        cell.kind = "splitter";
+        cell.orientation = 0;
+        splitters.push(cell);
+        rotatables.push(cell);
+      } else if (glyph === "Z") {
+        cell.kind = "splitter";
+        cell.orientation = 1;
+        splitters.push(cell);
+        rotatables.push(cell);
       } else if (glyph === "*") {
         cell.kind = "prism";
         prisms.push(cell);
@@ -63,6 +78,10 @@ export function parseLevel(level) {
         cell.kind = "emitter";
         cell.direction = EMITTER_DIRECTIONS[glyph];
         emitters.push(cell);
+      } else if (glyph >= "1" && glyph <= "4") {
+        cell.kind = "portal";
+        cell.pair = glyph;
+        portals.push(cell);
       } else if (glyph !== ".") {
         throw new Error(`Unknown tile '${glyph}' in level ${level.id ?? "(unnamed)"}.`);
       }
@@ -71,6 +90,14 @@ export function parseLevel(level) {
     cells.push(row);
   }
 
+  for (const portal of portals) {
+    const peers = portals.filter((candidate) => candidate.pair === portal.pair);
+    if (peers.length !== 2) {
+      throw new Error(
+        `Level ${level.id ?? "(unnamed)"} needs exactly two portals labelled '${portal.pair}'.`,
+      );
+    }
+  }
   if (emitters.length === 0) {
     throw new Error(`Level ${level.id ?? "(unnamed)"} has no emitter.`);
   }
@@ -83,9 +110,12 @@ export function parseLevel(level) {
     height,
     cells,
     mirrors,
+    splitters,
+    rotatables,
     emitters,
     receivers,
     prisms,
+    portals,
     walls,
   });
 }
@@ -108,6 +138,12 @@ export function centerOf(cell) {
 function boundaryPoint(cell, direction) {
   const [dx, dy] = DELTAS[direction];
   return { x: cell.x + 0.5 + dx * 0.5, y: cell.y + 0.5 + dy * 0.5 };
+}
+
+export function portalExit(board, portal) {
+  return board.portals.find(
+    (candidate) => candidate !== portal && candidate.pair === portal.pair,
+  ) ?? null;
 }
 
 export function traceBeams(board) {
@@ -169,6 +205,41 @@ export function traceBeams(board) {
         continue;
       }
 
+      if (next.kind === "splitter") {
+        const turn = next.orientation === 0 ? 1 : 3;
+        stack.push({
+          x: nx,
+          y: ny,
+          direction: (direction + turn) % 4,
+          source,
+          points: [centerOf(next)],
+        });
+        x = nx;
+        y = ny;
+        continue;
+      }
+
+      if (next.kind === "portal") {
+        paths.push({ points, source });
+        const exit = portalExit(board, next);
+        if (!exit) {
+          break;
+        }
+        const exitKey = `${exit.x},${exit.y},${direction}`;
+        if (visited.has(exitKey)) {
+          break;
+        }
+        visited.add(exitKey);
+        stack.push({
+          x: exit.x,
+          y: exit.y,
+          direction,
+          source,
+          points: [centerOf(exit)],
+        });
+        break;
+      }
+
       if (next.kind === "prism") {
         for (const turn of [1, 3]) {
           stack.push({
@@ -199,7 +270,7 @@ export function traceBeams(board) {
 
 export function rotateAt(board, x, y) {
   const cell = cellAt(board, x, y);
-  if (!cell || cell.kind !== "mirror") {
+  if (!cell || (cell.kind !== "mirror" && cell.kind !== "splitter")) {
     return false;
   }
   cell.orientation = cell.orientation === 0 ? 1 : 0;
@@ -264,5 +335,5 @@ export function starsFor(moves, par) {
 }
 
 export function orientationKey(board) {
-  return board.mirrors.map((mirror) => mirror.orientation).join("");
+  return board.rotatables.map((piece) => piece.orientation).join("");
 }

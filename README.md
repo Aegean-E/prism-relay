@@ -2,7 +2,7 @@
 
 [![Built with AIKit](https://img.shields.io/badge/built%20with-AIKit-6f42c1)](https://github.com/Aegean-E/AIKit)
 
-A neon light-routing puzzle game: rotate mirrors, split beams through prisms, and charge every receiver across six handcrafted chambers.
+A neon light-routing puzzle game: rotate mirrors and splitters, split beams through prisms, fold space through portals, and charge every receiver across three episodes.
 
 ## 30-Second Cold-Start Quick Reference
 
@@ -25,59 +25,66 @@ A neon light-routing puzzle game: rotate mirrors, split beams through prisms, an
 
 | Input | Action |
 |---|---|
-| Click / tap a mirror | Rotate it 90 degrees |
+| Click / tap a mirror or splitter | Rotate it 90 degrees |
 | Arrow keys | Move focus between rotatable pieces |
-| Space / Enter | Rotate the focused mirror |
+| Space / Enter | Rotate the focused piece |
 | R | Restart the chamber |
+| P | Open or close the operator profile |
 | Esc | Pause |
-| M | Toggle sound |
+| M | Mute or unmute all audio |
 
 ## What Is Prism Relay
 
-Each chamber is a grid of emitters, mirrors, prisms and receivers. An emitter fires a continuous beam. A mirror reflects the beam to an adjacent cell; a prism passes the beam through and splits copies to both perpendicular sides. A receiver absorbs the beam and charges. Charge every receiver to close the relay.
+Each chamber is a grid of emitters, mirrors, splitters, prisms, portals and receivers. An emitter fires a continuous beam. A mirror reflects the beam; a splitter keeps the main beam and forks a copy to one side; a prism passes the beam through and splits copies to both perpendicular sides; a paired portal carries the beam across the grid in the same direction. A receiver absorbs the beam and charges. Charge every receiver to close the relay.
 
-Moves are counted per mirror rotation. Each chamber advertises a par, the shortest possible solution. Finish at or under par for three stars, within two extra moves for two, and otherwise one. The best rating and move count for every chamber are saved locally.
+Moves are counted per rotation. Each chamber advertises a par, the shortest possible solution. Finish at or under par for three stars, within two extra moves for two, and otherwise one. The best rating and move count for every chamber are saved locally.
 
-### Chambers
+### Episodes and Chambers
 
-| Chapter | Name | Idea |
-|---|---|---|
-| 01 | First Light | One mirror, one clean reflection |
-| 02 | Split Decision | A prism feeds two receivers |
-| 03 | Mirror Maze | Three independent branches |
-| 04 | Switchback | A walled service corridor |
-| 05 | Crossfire | Two emitters, six receivers |
-| 06 | The Vault | Four prisms and a six-move finale |
+| Episode | Chambers | Mechanic | Arc |
+|---|---|---|---|
+| I — Ignition | 01–06 | Mirrors and fixed prisms | Learn the relay, then close a six-chamber vault |
+| II — Refraction | 07–10 | Rotatable splitters | Fork the signal and keep every branch alive |
+| III — Crossing | 11–13 | Paired teleport portals | Fold space and finish the longest circuit |
 
-Progress is stored in `localStorage` under `prism-relay.progress.v1`. A missing or corrupt record resets safely without interrupting play.
+Every episode ends with a larger, harder finale. Par rises from 1 move in First Light to 13 moves in The Long Way Home.
+
+### Operator Profile and Audio
+
+The profile stores a callsign (up to 18 characters), one of four sigils, rank, chamber and star totals, perfect routes, total best moves, per-episode progress, and audio preferences. Rank climbs from Cadet through Operator, Weaver, Architect and Lumen to Relay Master at all 39 stars.
+
+Music and effects are generated at runtime with WebAudio; there are no audio files. Music begins after the first user gesture, respects the browser autoplay policy, pauses when the tab is hidden, and can be toggled independently from effects in the profile or muted together with M.
+
+Progress is stored in `localStorage` under `prism-relay.progress.v1`. A missing or corrupt record resets safely; an older record without profile, music or episode fields keeps its stars and gains defaults. Sequential unlocks are repaired from completed chambers, so a save that finished Ignition opens Refraction automatically.
 
 ## What's Inside
 
 ```text
 prism-relay/
 ├── .aikit/                    <- project memory: record, ledger, decisions, UI contract
-├── .gitignore                <- transient state and caches excluded
-├── LICENSE                   <- GNU AGPL-3.0
-├── README.md                 <- this living quick reference
-├── index.html                 <- semantic shell and all UI surfaces
+├── .gitignore                 <- transient state and caches excluded
+├── COMMERCIAL.md              <- commercial licensing and enterprise agreement
+├── LICENSE                    <- GNU AGPL-3.0 with the dual-licensing notice
+├── README.md                  <- this living quick reference
+├── index.html                 <- semantic shell and all four UI screens
 ├── package.json               <- zero dependencies, test and snapshot commands
 ├── scripts/
 │   ├── serve.mjs              <- Node standard-library static server
 │   └── ui-inventory.mjs       <- stable data-ui / data-panel / data-cue inventory
 ├── src/
 │   ├── game/
-│   │   ├── engine.js          <- pure parser, beam tracer, session and scoring
-│   │   ├── levels.js          <- six frozen ASCII chambers and pars
-│   │   └── solver.js          <- exhaustive minimum-move solver
+│   │   ├── engine.js          <- parser, beam tracer, splitters, portals, sessions
+│   │   ├── levels.js          <- three episodes and thirteen frozen ASCII chambers
+│   │   └── solver.js          <- exhaustive minimum-move solver over all rotatables
 │   ├── ui/
-│   │   ├── app.js             <- screens, board renderer, input, modal flow
-│   │   ├── audio.js           <- generated WebAudio cues, no asset files
-│   │   └── progress.js        <- versioned localStorage envelope
+│   │   ├── app.js             <- screens, board renderer, profile, input, dialogs
+│   │   ├── audio.js           <- generated effects and ambient music, no assets
+│   │   └── progress.js        <- versioned saves, profile, rank and statistics
 │   ├── styles.css             <- component styling using theme tokens
 │   └── theme.css              <- the only file with raw color and font values
 └── tests/
-    ├── engine.test.js         <- physics, cycles, session, solver-backed pars
-    ├── progress.test.js       <- corrupt state, best result, unlock, sound
+    ├── engine.test.js         <- physics, splitters, portals, sessions, pars
+    ├── progress.test.js       <- saves, profile, rank, unlocks, audio settings
     ├── server.test.js         <- static path containment and traversal refusal
     └── ui.test.js             <- screen, control and manifest contract
 ```
@@ -85,10 +92,12 @@ prism-relay/
 ### Design Decisions
 
 - **Pure engine first.** `engine.js` knows nothing about the DOM. `traceBeams` returns immutable paths and lit-receiver keys, so tests and the SVG renderer share one source of truth.
-- **Solver-backed par.** Every level is checked at test time by enumerating mirror orientations. The advertised par must equal the true minimum move count.
+- **Solver-backed par.** Every chamber is checked at test time by enumerating every two-state rotatable, including splitters. The advertised par must equal the true minimum move count.
+- **Segmented portal paths.** A portal ends one beam segment and starts another at its twin, so the renderer never draws a false line across unrelated tiles.
+- **Additive saves.** The save version stays at 1. New fields are optional and normalized, while sequential unlocks are reconstructed from completed chambers instead of discarding old progress.
 - **Token-only styling.** Raw colors and font values live in `src/theme.css`; every other line uses CSS custom properties.
-- **Accessible by construction.** The board is a grid of real buttons with labels, keyboard focus, `aria-pressed` mirror state, a live status line and a native `<dialog>`.
-- **No external assets.** Light beams are SVG paths, pieces are CSS shapes, and sounds are synthesized with WebAudio.
+- **Accessible by construction.** The board is a group of real buttons with labels, roving keyboard focus, a live status line and a native `<dialog>`; buttons and topbar controls meet 3:1 boundaries and 44px coarse-pointer targets, while dense board cells stay at least 24px.
+- **No external assets.** Light beams are SVG paths, pieces are CSS shapes, and all audio is synthesized with WebAudio after a user gesture.
 
 ## AIKit Workflow
 
@@ -102,7 +111,7 @@ Run these from the AIKit checkout:
 | Close the UI task after review | `python aikit.py ui finish prism-relay --reviewed --reviewer <name>` |
 | Phase 4: every gate | `python aikit.py check prism-relay` |
 
-The committed UI contract `.aikit/ui.json` bounds the surface to `index.html` and `src/**`, runs `npm test` as the fast proof, and compares `npm run ui:snapshot` against the baseline. Tests, tooling, project memory and README are protected paths.
+The committed UI contract `.aikit/ui.json` bounds the surface to `index.html` and `src/**`, runs `npm test` as the fast proof, and compares `npm run ui:snapshot` against the baseline. Tests, tooling, project memory and README are protected paths. A feature pass that also changes the engine, tests or memory uses the project gates directly instead of opening a UI-only task.
 
 ### Screenshot QA
 
@@ -111,14 +120,16 @@ The app accepts development-only query parameters so every state can be captured
 | URL | State |
 |---|---|
 | `/?screen=title` | Title |
-| `/?screen=chambers` | Chamber index |
-| `/?level=mirror-maze` | Gameplay |
-| `/?level=mirror-maze&preview=howto` | How-to dialog |
-| `/?level=mirror-maze&preview=pause` | Pause dialog |
-| `/?level=mirror-maze&preview=victory` | Three-star victory dialog |
+| `/?screen=chambers` | Episode and chamber index |
+| `/?screen=profile` | Operator profile |
+| `/?level=double-down` | Splitter gameplay (Episode II) |
+| `/?level=twin-gates` | Portal gameplay (Episode III) |
+| `/?level=wormhole&preview=howto` | How-to dialog |
+| `/?level=wormhole&preview=pause` | Pause dialog |
+| `/?level=the-vault&preview=victory` | Episode-complete victory dialog |
 
 Screenshots are reviewed by independent model-provider subagents before the final UI commit; a vision-capable reviewer verifies the final pass. Screenshot files and the review brief live in the local, git-ignored `.review/` folder.
 
 ## License
 
-GNU Affero General Public License v3.0; see [LICENSE](LICENSE).
+GNU Affero General Public License v3.0 for open-source use; see [LICENSE](LICENSE). Commercial use is available under the Aegean-E Commercial License; see [COMMERCIAL.md](COMMERCIAL.md).
