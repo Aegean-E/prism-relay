@@ -1,4 +1,5 @@
 import { createServer } from "node:http";
+import { spawn } from "node:child_process";
 import { readFile, stat } from "node:fs/promises";
 import { extname, join, normalize, resolve, sep } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -6,6 +7,47 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const portArg = process.argv.indexOf("--port");
 const port = portArg > -1 ? Number(process.argv[portArg + 1]) : 4173;
+const openBrowserOnStart = process.argv.includes("--open");
+
+export function browserCommand(platform, url) {
+  if (platform === "win32") {
+    return { command: "cmd", args: ["/c", "start", "", url] };
+  }
+  if (platform === "darwin") {
+    return { command: "open", args: [url] };
+  }
+  return { command: "xdg-open", args: [url] };
+}
+
+export function looksLikePrismRelay(body) {
+  return typeof body === "string" && body.includes("<title>Prism Relay");
+}
+
+export function launchBrowser(url, platform = process.platform, spawnProcess = spawn) {
+  const { command, args } = browserCommand(platform, url);
+  try {
+    const child = spawnProcess(command, args, {
+      detached: true,
+      stdio: "ignore",
+      windowsHide: true,
+    });
+    child.on("error", () => {});
+    child.unref();
+    return child;
+  } catch {
+    // The server still runs; the user can open the printed URL manually.
+    return null;
+  }
+}
+
+async function prismRelayIsRunning(url) {
+  try {
+    const response = await fetch(url, { signal: AbortSignal.timeout(1500) });
+    return response.ok && looksLikePrismRelay(await response.text());
+  } catch {
+    return false;
+  }
+}
 const types = {
   ".html": "text/html; charset=utf-8",
   ".js": "text/javascript; charset=utf-8",
@@ -52,7 +94,27 @@ const isMain =
   Boolean(process.argv[1]) && import.meta.url === pathToFileURL(resolve(process.argv[1])).href;
 
 if (isMain) {
+  server.on("error", async (error) => {
+    const url = `http://127.0.0.1:${port}/`;
+    if (error.code === "EADDRINUSE") {
+      if (openBrowserOnStart && (await prismRelayIsRunning(url))) {
+        console.log(`Prism Relay is already running at ${url}`);
+        launchBrowser(url);
+        return;
+      }
+      console.error(`Port ${port} is already in use, so Prism Relay did not start.`);
+      console.error(`If the game is already open, use ${url}.`);
+      process.exitCode = 1;
+      return;
+    }
+    console.error(`Prism Relay could not start: ${error.message}`);
+    process.exitCode = 1;
+  });
   server.listen(port, "127.0.0.1", () => {
-    console.log(`Prism Relay running at http://127.0.0.1:${port}/`);
+    const url = `http://127.0.0.1:${port}/`;
+    console.log(`Prism Relay running at ${url}`);
+    if (openBrowserOnStart) {
+      launchBrowser(url);
+    }
   });
 }

@@ -5,7 +5,7 @@
   "type": "module",
   "description": "A neon laser-mirror puzzle game: rotate mirrors and splitters, fold beams through portals, and recharge the grid across three episodes.",
   "scripts": {
-    "start": "node scripts/serve.mjs",
+    "start": "node scripts/serve.mjs --open",
     "test": "node --test tests",
     "ui:snapshot": "node scripts/ui-inventory.mjs"
   },

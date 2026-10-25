@@ -104,6 +104,7 @@ test("the shell has no inline styles or third-party asset dependencies", () => {
 test("the manifest keeps a zero-dependency test and snapshot command", () => {
   assert.equal(manifest.type, "module");
   assert.equal(manifest.scripts.test, "node --test tests");
+  assert.equal(manifest.scripts.start, "node scripts/serve.mjs --open");
   assert.equal(manifest.scripts["ui:snapshot"], "node scripts/ui-inventory.mjs");
   assert.equal(manifest.dependencies, undefined);
   assert.equal(manifest.devDependencies, undefined);

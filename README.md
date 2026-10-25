@@ -7,11 +7,8 @@ A neon light-routing puzzle game: rotate mirrors and splitters, split beams thro
 ## 30-Second Cold-Start Quick Reference
 
 - **Runtime Prerequisites**: Node.js 20+ (tested on Node 26) and a modern browser (Chromium, Firefox or Safari). No npm install and no network access are required.
-- **Play locally**:
-  ```bash
-  npm start
-  ```
-  Then open `http://127.0.0.1:4173/`.
+- **Play locally (one click)**: double-click `play.cmd` on Windows, run `./play.sh` on macOS/Linux, or run `npm start`. Each starts the server and opens the game at `http://127.0.0.1:4173/`; keep that address so your saved progress stays available.
+- **Do not open `index.html` directly.** Browsers block ES modules from `file://`, so the page renders but the Play button does nothing. Use a launcher above.
 - **Canonical Regression Shield Gate**:
   ```bash
   npm test
@@ -62,14 +59,17 @@ Progress is stored in `localStorage` under `prism-relay.progress.v1`. A missing 
 ```text
 prism-relay/
 ├── .aikit/                    <- project memory: record, ledger, decisions, UI contract
+├── .gitattributes             <- CRLF for .cmd and LF for .sh launchers
 ├── .gitignore                 <- transient state and caches excluded
 ├── COMMERCIAL.md              <- commercial licensing and enterprise agreement
 ├── LICENSE                    <- GNU AGPL-3.0 with the dual-licensing notice
 ├── README.md                  <- this living quick reference
 ├── index.html                 <- semantic shell and all four UI screens
 ├── package.json               <- zero dependencies, test and snapshot commands
+├── play.cmd                   <- Windows one-click launcher: serve and open
+├── play.sh                    <- macOS/Linux one-click launcher: serve and open
 ├── scripts/
-│   ├── serve.mjs              <- Node standard-library static server
+│   ├── serve.mjs              <- static server with --open and port-in-use recovery
 │   └── ui-inventory.mjs       <- stable data-ui / data-panel / data-cue inventory
 ├── src/
 │   ├── game/
@@ -85,7 +85,7 @@ prism-relay/
 └── tests/
     ├── engine.test.js         <- physics, splitters, portals, sessions, pars
     ├── progress.test.js       <- saves, profile, rank, unlocks, audio settings
-    ├── server.test.js         <- static path containment and traversal refusal
+    ├── server.test.js         <- path containment, traversal refusal, launcher helpers
     └── ui.test.js             <- screen, control and manifest contract
 ```
 
