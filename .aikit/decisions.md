@@ -30,3 +30,7 @@ contract, a dependency, a data format or the architecture; IDs are consecutive a
 - New versions use Aegean Game License 1.1 (AGL-1.1); versions at or before `v0.2.0-agpl` remain AGPL-3.0.
 - Rights holder: AegeanWorks; internal AI commit identity `assistant@local`.
 - Counsel review of the 1.1 texts remains pending.
+
+## License notice cleanup (2026-10-26)
+
+- The license-history notes were removed from README.md and COMMERCIAL.md: the project is offered only under the Aegean Game License 1.1 (AGL-1.1), with commercial use under ACL-1.0.

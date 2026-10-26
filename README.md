@@ -134,8 +134,6 @@ The app accepts development-only query parameters so every state can be captured
 
 Screenshots are reviewed by independent model-provider subagents before the final UI commit; a vision-capable reviewer verifies the final pass. Screenshot files and the review brief live in the local, git-ignored `.review/` folder.
 
-> **License history:** versions up to and including `v0.2.0-agpl` remain available under GNU AGPL-3.0.
-
 ## 📜 License
 
 Free for personal play under the Aegean Game License 1.1 (AGL-1.1); see [LICENSE](LICENSE). It is DRM-free: Licensor ships no DRM and a distributor may not add it. Streaming, modding and free mods are allowed. Commercial use, paid mods and AI training need the Aegean Commercial License 1.0 (ACL-1.0); see [COMMERCIAL.md](COMMERCIAL.md).
