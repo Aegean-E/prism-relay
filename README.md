@@ -67,7 +67,6 @@ prism-relay/
 ├── REUSE.toml                <- Machine-readable SPDX metadata
 ├── CHANGELOG.md              <- Version history and license transition
 ├── ASSETS.md                 <- Asset/data manifest: what the license covers
-
 ├── README.md                  <- this living quick reference
 ├── index.html                 <- semantic shell and all four UI screens
 ├── package.json               <- zero dependencies, test and snapshot commands
@@ -135,7 +134,7 @@ The app accepts development-only query parameters so every state can be captured
 
 Screenshots are reviewed by independent model-provider subagents before the final UI commit; a vision-capable reviewer verifies the final pass. Screenshot files and the review brief live in the local, git-ignored `.review/` folder.
 
-> **License history:** versions released before `v0.2.0-agpl` remain available under GNU AGPL-3.0.
+> **License history:** versions up to and including `v0.2.0-agpl` remain available under GNU AGPL-3.0.
 
 ## 📜 License
 
