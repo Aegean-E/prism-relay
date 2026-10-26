@@ -1,7 +1,8 @@
 {
   "name": "prism-relay",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
+  "license": "SEE LICENSE IN LICENSE",
   "type": "module",
   "description": "A neon laser-mirror puzzle game: rotate mirrors and splitters, fold beams through portals, and recharge the grid across three episodes.",
   "scripts": {

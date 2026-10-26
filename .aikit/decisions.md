@@ -25,3 +25,9 @@ contract, a dependency, a data format or the architecture; IDs are consecutive a
 - **Context**: The original six chambers form a complete arc but leave no long-term progression. The user asked for a profile, more episodes that get harder, mechanics that appear later, and music.
 - **Decision**: Group chambers into three ordered episodes: Ignition (mirrors and fixed prisms), Refraction (rotatable splitters), Crossing (paired teleport portals). Generalize the solver to enumerate every two-state rotatable, so splitters are covered by the same par proof as mirrors. Keep the progress envelope version at 1 and add optional `music` and `profile` fields with normalized defaults, plus sequential-unlock repair so saves made before the new episodes still open the first new chamber. Profile callsign, sigil, rank and audio settings live in localStorage; background music is synthesized with WebAudio after a user gesture, with no audio assets.
 - **Consequences**: Old saves are preserved without a destructive migration. Episode content adds 7 chambers and 2 mechanics; the final chamber carries 13 rotatables, so the solver still runs in milliseconds. Portal paths are emitted as separate segments to avoid drawing a false line across the grid. Music is intentionally simple and stops when the tab is hidden.
+## Licensing migration (v0.2.0-agpl)
+
+- New versions use Aegean Game License 1.1 (AGL-1.1); versions at or before `v0.2.0-agpl` remain AGPL-3.0.
+- Rights holder: AegeanWorks; internal AI commit identity `assistant@local`.
+- Counsel review of the 1.1 texts remains pending.
+

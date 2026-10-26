@@ -1,6 +1,6 @@
 # Prism Relay
 
-[![Built with AIKit](https://img.shields.io/badge/built%20with-AIKit-6f42c1)](https://github.com/Aegean-E/AIKit)
+[![Built with AIKit](https://img.shields.io/badge/built%20with-AIKit-6f42c1)](https://github.com/AegeanWorks/AIKit)
 
 A neon light-routing puzzle game: rotate mirrors and splitters, split beams through prisms, fold space through portals, and charge every receiver across three episodes.
 
@@ -62,7 +62,12 @@ prism-relay/
 ├── .gitattributes             <- CRLF for .cmd and LF for .sh launchers
 ├── .gitignore                 <- transient state and caches excluded
 ├── COMMERCIAL.md              <- commercial licensing and enterprise agreement
-├── LICENSE                    <- GNU AGPL-3.0 with the dual-licensing notice
+├── LICENSE                   <- Aegean Game License 1.1 (AGL-1.1): DRM-free personal play
+├── LICENSES/                 <- REUSE license texts
+├── REUSE.toml                <- Machine-readable SPDX metadata
+├── CHANGELOG.md              <- Version history and license transition
+├── ASSETS.md                 <- Asset/data manifest: what the license covers
+
 ├── README.md                  <- this living quick reference
 ├── index.html                 <- semantic shell and all four UI screens
 ├── package.json               <- zero dependencies, test and snapshot commands
@@ -130,6 +135,8 @@ The app accepts development-only query parameters so every state can be captured
 
 Screenshots are reviewed by independent model-provider subagents before the final UI commit; a vision-capable reviewer verifies the final pass. Screenshot files and the review brief live in the local, git-ignored `.review/` folder.
 
-## License
+> **License history:** versions released before `v0.2.0-agpl` remain available under GNU AGPL-3.0.
 
-GNU Affero General Public License v3.0 for open-source use; see [LICENSE](LICENSE). Commercial use is available under the Aegean-E Commercial License; see [COMMERCIAL.md](COMMERCIAL.md).
+## 📜 License
+
+Free for personal play under the Aegean Game License 1.1 (AGL-1.1); see [LICENSE](LICENSE). It is DRM-free: Licensor ships no DRM and a distributor may not add it. Streaming, modding and free mods are allowed. Commercial use, paid mods and AI training need the Aegean Commercial License 1.0 (ACL-1.0); see [COMMERCIAL.md](COMMERCIAL.md).
