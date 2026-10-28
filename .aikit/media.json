@@ -17,35 +17,35 @@
       "path": "assets/logo.png",
       "status": "approved",
       "commit": "",
-      "generated_at": "2026-10-28T11:43:51",
+      "generated_at": "2026-10-28T13:53:42",
       "review": {
         "status": "approved",
-        "reviewer": "subagent:vision-review",
+        "reviewer": "subagent:brand-review",
         "method": "vision",
-        "notes": "Fix verified: monogram PY unique and matches project; legible, unclipped, premium.",
+        "notes": "PR monogram now correct (was PY); prism diamond with crossing light beams strongly fits a puzzle game; GAME category clean; Prism Relay spelled correctly; vibrant premium aesthetic.",
         "score": 92,
-        "reviewed_at": "2026-10-28T11:49:30"
+        "reviewed_at": "2026-10-28T14:00:01"
       }
     },
     "social_preview": {
       "path": "assets/social-preview.png",
       "status": "approved",
       "commit": "",
-      "generated_at": "2026-10-28T11:43:51",
+      "generated_at": "2026-10-28T13:53:42",
       "review": {
         "status": "approved",
-        "reviewer": "subagent:vision-review",
+        "reviewer": "subagent:brand-review",
         "method": "vision",
-        "notes": "Strong hierarchy; legible, unclipped; premium card, no watermark.",
-        "score": 90,
-        "reviewed_at": "2026-10-28T11:49:30"
+        "notes": "Puzzle web game; tagline 'A minimal puzzle game about splitting light.' Centered prism layout, no clipping; title/tagline/chips (game, puzzle, web) and URL clear; light-splitting imagery directly matches theme.",
+        "score": 94,
+        "reviewed_at": "2026-10-28T14:00:01"
       }
     },
     "artwork": {
       "path": "assets/artwork.jpg",
       "status": "pending_review",
       "commit": "",
-      "generated_at": "2026-10-28T11:43:51",
+      "generated_at": "2026-10-28T13:34:34",
       "review": null
     }
   },
