@@ -4,6 +4,7 @@
   "test_command": "node --test tests",
   "topics": [
     "aikit",
+    "aikit-integrated",
     "source-available",
     "aegean-game-license",
     "drm-free",
@@ -21,8 +22,7 @@
     "game-development",
     "game-design",
     "html5",
-    "neon",
-    "mirror"
+    "neon"
   ],
   "gates": {},
   "ui_required": false,
