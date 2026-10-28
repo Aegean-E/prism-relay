@@ -5,53 +5,48 @@
   "has_ui": true,
   "ui_kind": "web",
   "palette": [
-    "#07111f",
-    "#0e2a47",
-    "#60a5fa",
-    "#e2f8ff"
+    "#05120f",
+    "#0c2f25",
+    "#10b981",
+    "#fbbf24"
   ],
+  "motif": "prism",
+  "layout": "center",
   "assets": {
     "logo": {
       "path": "assets/logo.svg",
       "status": "approved",
       "commit": "",
-      "generated_at": "2026-10-28T08:02:47",
+      "generated_at": "2026-10-28T08:47:13",
       "review": {
         "status": "approved",
         "reviewer": "subagent:vision-review",
         "method": "vision",
-        "notes": "PR monogram in blue, dark teal, rings balanced.",
-        "score": 93,
-        "reviewed_at": "2026-10-28T08:10:43"
+        "notes": "PR triangle, legible",
+        "score": 88,
+        "reviewed_at": "2026-10-28T08:58:21"
       }
     },
     "social_preview": {
       "path": "assets/social-preview.svg",
       "status": "approved",
       "commit": "",
-      "generated_at": "2026-10-28T08:02:47",
+      "generated_at": "2026-10-28T08:47:13",
       "review": {
         "status": "approved",
         "reviewer": "subagent:vision-review",
         "method": "vision",
-        "notes": "PR icon, title, tunneling description, WEB tag, coherent.",
-        "score": 93,
-        "reviewed_at": "2026-10-28T08:10:43"
+        "notes": "Consistent template, legible",
+        "score": 88,
+        "reviewed_at": "2026-10-28T08:58:21"
       }
     },
     "social_preview_png": {
       "path": "assets/social-preview.png",
-      "status": "approved",
+      "status": "pending_review",
       "commit": "",
-      "generated_at": "2026-10-28T08:02:48",
-      "review": {
-        "status": "approved",
-        "reviewer": "subagent:vision-review",
-        "method": "structural",
-        "notes": "Rendered from the approved 1280x640 social SVG; exact dimensions verified.",
-        "score": null,
-        "reviewed_at": "2026-10-28T08:17:13"
-      }
+      "generated_at": "2026-10-28T08:47:14",
+      "review": null
     }
   },
   "screenshots": [
@@ -69,9 +64,9 @@
         "status": "approved",
         "reviewer": "subagent:vision-review",
         "method": "vision",
-        "notes": "2026-10-28-home.png \u2014 real hero UI 'Bend the light. Close the relay.' with diamond graphic, non-blank.",
-        "score": 92,
-        "reviewed_at": "2026-10-28T08:10:43"
+        "notes": "Real home UI with tagline and relay graphic, non-blank",
+        "score": 90,
+        "reviewed_at": "2026-10-28T08:58:22"
       }
     }
   ]
