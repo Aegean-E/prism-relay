@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "name": "prism-relay",
+  "repo": "Prism-Relay",
+  "has_ui": true,
+  "ui_kind": "web",
+  "palette": [
+    "#07111f",
+    "#0e2a47",
+    "#60a5fa",
+    "#e2f8ff"
+  ],
+  "assets": {
+    "logo": {
+      "path": "assets/logo.svg",
+      "status": "approved",
+      "commit": "",
+      "generated_at": "2026-10-28T08:02:47",
+      "review": {
+        "status": "approved",
+        "reviewer": "subagent:vision-review",
+        "method": "vision",
+        "notes": "PR monogram in blue, dark teal, rings balanced.",
+        "score": 93,
+        "reviewed_at": "2026-10-28T08:10:43"
+      }
+    },
+    "social_preview": {
+      "path": "assets/social-preview.svg",
+      "status": "approved",
+      "commit": "",
+      "generated_at": "2026-10-28T08:02:47",
+      "review": {
+        "status": "approved",
+        "reviewer": "subagent:vision-review",
+        "method": "vision",
+        "notes": "PR icon, title, tunneling description, WEB tag, coherent.",
+        "score": 93,
+        "reviewed_at": "2026-10-28T08:10:43"
+      }
+    },
+    "social_preview_png": {
+      "path": "assets/social-preview.png",
+      "status": "pending_review",
+      "commit": "",
+      "generated_at": "2026-10-28T08:02:48",
+      "review": null
+    }
+  },
+  "screenshots": [
+    {
+      "path": "assets/screenshots/2026-10-28-home.png",
+      "alt": "Prism-Relay interface at 2026-10-28",
+      "caption": "Prism-Relay interface captured from index.html",
+      "commit": "de3c99786307e6a61fc1a9d5611cdf2db19050b1",
+      "taken_at": "2026-10-28",
+      "viewport": "1440x900",
+      "width": 1440,
+      "height": 900,
+      "status": "approved",
+      "review": {
+        "status": "approved",
+        "reviewer": "subagent:vision-review",
+        "method": "vision",
+        "notes": "2026-10-28-home.png \u2014 real hero UI 'Bend the light. Close the relay.' with diamond graphic, non-blank.",
+        "score": 92,
+        "reviewed_at": "2026-10-28T08:10:43"
+      }
+    }
+  ]
+}
