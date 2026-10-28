@@ -1,8 +1,8 @@
 # Prism Relay
 
 <!-- aegean:media:start -->
-<p align="center"><img src="assets/logo.jpg" alt="Prism-Relay logo" width="96" height="96"></p>
 <p align="center"><img src="assets/social-preview.png" alt="Prism-Relay social preview" width="100%"></p>
+*Brand assets are generated and may not fully represent the project scope.*
 <!-- aegean:media:end -->
 
 [![Built with AIKit](https://img.shields.io/badge/built%20with-AIKit-6f42c1)](https://github.com/AegeanWorks/AIKit)
@@ -148,5 +148,5 @@ Free for personal play under the Aegean Game License 1.1 (AGL-1.1); see [LICENSE
 
 <a href="https://github.com/AegeanWorks/Prism-Relay/commit/de3c997"><img src="assets/screenshots/2026-10-28-home.png" alt="Prism-Relay interface at 2026-10-28"></a>
 
-*Prism-Relay interface captured from index.html* · commit `de3c997` · 2026-10-28
+*commit `de3c997` · 2026-10-28*
 <!-- aegean:screenshots:end -->
