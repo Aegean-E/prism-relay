@@ -4,17 +4,17 @@
   "test_command": "node --test tests",
   "topics": [
     "aikit",
+    "source-available",
+    "aegean-game-license",
+    "drm-free",
+    "commercial-license",
     "game",
     "puzzle",
-    "web",
-    "drm-free",
     "javascript",
-    "source-available",
     "browser-game",
     "aegeanworks",
     "html5-game",
     "puzzle-game",
-    "software",
     "user-interface",
     "web-app",
     "web-game",
@@ -65,5 +65,11 @@
     "puzzle",
     "game-design",
     "html5"
+  ],
+  "license_topics": [
+    "source-available",
+    "aegean-game-license",
+    "drm-free",
+    "commercial-license"
   ]
 }
