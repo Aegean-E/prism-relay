@@ -71,6 +71,7 @@ prism-relay/
 ├── REUSE.toml                <- Machine-readable SPDX metadata
 ├── CHANGELOG.md              <- Version history and license transition
 ├── ASSETS.md                 <- Asset/data manifest: what the license covers
+├── assets/                   <- reviewed brand artwork and UI screenshot
 ├── README.md                  <- this living quick reference
 ├── index.html                 <- semantic shell and all four UI screens
 ├── package.json               <- zero dependencies, test and snapshot commands
