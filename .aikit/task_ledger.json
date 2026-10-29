@@ -14,24 +14,6 @@
   "checkpoints": [
     {
       "task_id": "episodes-profile-music",
-      "phase": "phase 3",
-      "phase_num": 3,
-      "description": "[2/5]-[4/5] Resumed implementation found complete in the working tree: splitters and portals in the engine, 13 chambers in 3 episodes with solver-proven pars, profile/rank and generated music modules, four-screen UI, updated tests and README, ADR-002; added roving focus to the sigil radio group with a regression test. checklists: passed",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1792919351.7402127,
-      "timestamp_str": "2026-10-25 12:09:11",
-      "agent": "opencode:deepseek-v4.1-flash-free",
-      "handoff": {
-        "state": "14 modified files uncommitted, no commit or push authorized",
-        "next": "independent screenshot review and delivery commit when authorized",
-        "open": "second independent vision review",
-        "evidence": "44 tests, .review screenshots"
-      },
-      "continued_from": "unidentified"
-    },
-    {
-      "task_id": "episodes-profile-music",
       "phase": "phase 4",
       "phase_num": 4,
       "description": "[5/5] Verified: 44 tests and all 4 project gates pass; Playwright walkthrough of title, episode index, profile, splitter/portal gameplay, how-to, pause, chamber/episode/finale dialogs on desktop and mobile with zero console errors; a legacy Ignition save unlocks Refraction; callsign, sigil and music settings persist; every par stays solver-backed. checklists: passed",
@@ -285,6 +267,17 @@
       "status": "in_progress",
       "timestamp": 1793293465.3099985,
       "timestamp_str": "2026-10-29 20:04:25",
+      "agent": "opencode"
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge stage 11",
+      "phase_num": 3,
+      "description": "Reforge stage 11: window 33, 4 commit(s), 6 file(s) reviewed (unreviewed), 0 finding(s), 0 repaired",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1793294999.2972429,
+      "timestamp_str": "2026-10-29 20:29:59",
       "agent": "opencode"
     }
   ]
