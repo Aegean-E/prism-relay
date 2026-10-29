@@ -65,7 +65,8 @@ export function safePath(urlPath = "/", base = root) {
   } catch {
     return null;
   }
-  const relative = clean === "/" || clean === "" ? "index.html" : clean.replace(/^[/\\]+/, "");
+  const relative =
+    clean === "/" || clean === "" ? "index.html" : clean.replace(/^[/\\]+/, "").replace(/\\/g, "/");
   const candidate = normalize(join(base, relative));
   return candidate === base || candidate.startsWith(`${base}${sep}`) ? candidate : null;
 }
