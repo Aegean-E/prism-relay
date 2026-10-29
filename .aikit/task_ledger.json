@@ -13,164 +13,6 @@
   },
   "checkpoints": [
     {
-      "task_id": "build-prism-relay",
-      "phase": "phase 2",
-      "phase_num": 2,
-      "description": "[1/5] Plan: scaffold, deterministic beam engine + solver/tests, then UI shell, gameplay UI, menus/polish, multi-model review and gates",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1792859117.130347,
-      "timestamp_str": "2026-10-24 19:25:17",
-      "impact_assessment": {
-        "why": "The user asked for a new game with a UI that six independent model providers will review; a deterministic browser puzzle with a pure engine makes both gameplay and visual QA reproducible.",
-        "benefits": "Zero-install static game; testable beam physics and level solvability; a committed UI contract and screenshot evidence for reviewers.",
-        "risks": "contract: engine/UI boundary and level format; dependency: none allowed beyond Node stdlib and browser APIs; concurrency: animation frames versus input state; state: progress persistence versioning.",
-        "mitigation": "Pure modules for rules, a solver-backed test for every level, a single state owner, versioned localStorage, and UI guard + screenshot passes before commit."
-      },
-      "handoff": {
-        "next": "scaffold package.json, level data, engine, solver, tests",
-        "open": "none",
-        "evidence": "plan only"
-      }
-    },
-    {
-      "task_id": "build-prism-relay",
-      "phase": "phase 3",
-      "phase_num": 3,
-      "description": "[2/5] Engine, six solver-backed chambers, progress module, UI shell, UI contract and screenshot-ready inventory; checklists: passed",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1792860065.2852247,
-      "timestamp_str": "2026-10-24 19:41:05",
-      "handoff": {
-        "next": "ui begin, implement final gameplay renderer and visual system",
-        "evidence": "28 tests pass, 4/4 gates pass"
-      }
-    },
-    {
-      "task_id": "build-prism-relay",
-      "phase": "phase 3",
-      "phase_num": 3,
-      "description": "[3/5] Full responsive game UI implemented, five-state dialog flow, SVG beams, sound, persistence; review round 1 by evren/evren3/kilo-free; checklists: passed",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1792865159.2671757,
-      "timestamp_str": "2026-10-24 21:05:59",
-      "agent": "unidentified",
-      "handoff": {
-        "next": "apply review fixes (contrast tokens, modal and screen focus, roving tabindex, copy consistency, touch targets)",
-        "evidence": "28 unit tests, 28 browser interactions, 4/4 gates, UI verify OK, 1440/390/320 screenshots"
-      }
-    },
-    {
-      "task_id": "build-prism-relay",
-      "phase": "phase 3",
-      "phase_num": 3,
-      "description": "[4/5] Applied model-panel findings: AA contrast tokens, 3:1 control boundaries, modal and screen focus, roving board tabindex, receiver copy, beam dash pattern, unlit legend, 44px coarse-pointer targets, forced-colors fallback; checklists: passed",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1792865674.0537784,
-      "timestamp_str": "2026-10-24 21:14:34",
-      "agent": "unidentified",
-      "handoff": {
-        "next": "final strict gates, map refresh and completion",
-        "evidence": "3/6 review agents delivered (2 provider quota, 1 cancelled), 28 interaction checks, 28 tests, 4/4 gates, UI verify OK"
-      }
-    },
-    {
-      "task_id": "build-prism-relay",
-      "phase": "phase 4",
-      "phase_num": 4,
-      "description": "[5/5] Final contrast pass: AA faint token, 3:1 interactive borders on buttons, cards, panels and HUD, brighter locked cards; 28 interaction checks, 28 tests, UI verify green; checklists: passed",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1792865944.33673,
-      "timestamp_str": "2026-10-24 21:19:04",
-      "agent": "unidentified",
-      "handoff": {
-        "next": "commit final polish, run strict check, complete task",
-        "evidence": "title/chambers/game at 1440 and 320/390, no horizontal overflow, model panel round 1 findings applied"
-      }
-    },
-    {
-      "task_id": "build-prism-relay",
-      "phase": "completed",
-      "phase_num": 5,
-      "description": "Task 'build-prism-relay' completed successfully.",
-      "status": "completed",
-      "timestamp": 1792866017.2923198,
-      "timestamp_str": "2026-10-24 21:20:17",
-      "agent": "kilo:main",
-      "continued_from": "unidentified"
-    },
-    {
-      "task_id": "delivery-harden",
-      "phase": "phase 2",
-      "phase_num": 2,
-      "description": "[1/1] Plan: contain static server paths and correct UI review provenance before publish",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1792867171.9978867,
-      "timestamp_str": "2026-10-24 21:39:31",
-      "agent": "unidentified",
-      "impact_assessment": {
-        "why": "Pre-push analysis found that the dev server's prefix containment check could admit a sibling directory whose name starts with the project folder, and one UI history reviewer field overstated which providers completed the final round.",
-        "benefits": "Static serving is strictly confined to the project root, the regression is covered by a fast test, and the committed review evidence matches what actually happened.",
-        "risks": "contract: no gameplay or visual change; dependency: none, Node standard library only; concurrency: none; state: ui_history reviewer field corrected in place",
-        "mitigation": "Export the path resolver behind a main-module guard, cover traversal and sibling-prefix cases, correct the record, rerun all project gates and clean-worktree checks, then publish."
-      },
-      "handoff": {
-        "next": "edit serve.mjs, add tests/server.test.js, update README tree and ui_history provenance, verify, commit, publish"
-      }
-    },
-    {
-      "task_id": "delivery-harden",
-      "phase": "phase 3",
-      "phase_num": 3,
-      "description": "[1/1] Static server now contains requests to the project root with unit coverage for traversal, sibling-prefix and malformed escapes; review provenance corrected; 32 tests pass; checklists: passed",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1792867325.6170702,
-      "timestamp_str": "2026-10-24 21:42:05",
-      "agent": "unidentified",
-      "handoff": {
-        "next": "commit server hardening and provenance correction separately, verify HEAD in a clean worktree, then publish privately and push"
-      }
-    },
-    {
-      "task_id": "delivery-harden",
-      "phase": "completed",
-      "phase_num": 5,
-      "description": "Task 'delivery-harden' completed successfully.",
-      "status": "completed",
-      "timestamp": 1792867415.5639365,
-      "timestamp_str": "2026-10-24 21:43:35",
-      "agent": "kilo:main",
-      "continued_from": "unidentified"
-    },
-    {
-      "task_id": "episodes-profile-music",
-      "phase": "phase 2",
-      "phase_num": 2,
-      "description": "[1/5] Plan: splitter and portal mechanics with two new episodes, profile/rank screen, generated music, and a backward-compatible save schema",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1792869097.2140307,
-      "timestamp_str": "2026-10-24 22:11:37",
-      "agent": "unidentified",
-      "impact_assessment": {
-        "why": "The user wants long-term progression: a profile, more episodes with rising difficulty, mechanics introduced over time, and background music.",
-        "benefits": "Three episodes and 13 solver-backed chambers; two new mechanics (rotatable splitters, teleport portals); persistent callsign/sigil/rank; zero-asset generative music; old saves keep working.",
-        "risks": "contract: beam path/segment format used by renderer and solver, additive progress schema; dependency: none, Node stdlib and WebAudio only; concurrency: music scheduler and visibility changes, portal cycles; state: legacy saves missing profile/music fields.",
-        "mitigation": "Generalize solver over all rotatables, add cycle tests for portals, keep progress version 1 with normalized defaults and sequential unlock migration, start music only after a gesture, verify every par with the solver and every screen with screenshots."
-      },
-      "handoff": {
-        "state": "no commit or push authorized in this request",
-        "next": "engine and level data, then persistence/audio, then UI",
-        "evidence": "plan only"
-      }
-    },
-    {
       "task_id": "episodes-profile-music",
       "phase": "phase 3",
       "phase_num": 3,
@@ -310,6 +152,140 @@
       "timestamp": 1792922718.0184746,
       "timestamp_str": "2026-10-25 13:05:18",
       "agent": "opencode:deepseek-v4.1-flash-free"
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge run",
+      "phase_num": 3,
+      "description": "run started (start=3, step=3, stop=None)",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1793292591.3613746,
+      "timestamp_str": "2026-10-29 19:49:51",
+      "agent": "opencode"
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge stage 1",
+      "phase_num": 3,
+      "description": "Reforge stage 1: window 3, 3 commit(s), 2 file(s) reviewed (unreviewed), 0 finding(s), 0 repaired",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1793292596.5688772,
+      "timestamp_str": "2026-10-29 19:49:56",
+      "agent": "opencode"
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge stage 2",
+      "phase_num": 3,
+      "description": "Reforge stage 2: window 6, 3 commit(s), 2 file(s) reviewed (unreviewed), 0 finding(s), 0 repaired, 1 binary not analysed",
+      "files_affected": [
+        "assets/social-preview.png"
+      ],
+      "status": "in_progress",
+      "timestamp": 1793292711.018971,
+      "timestamp_str": "2026-10-29 19:51:51",
+      "agent": "opencode"
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge stage 3",
+      "phase_num": 3,
+      "description": "Reforge stage 3: window 9, 3 commit(s), 2 file(s) reviewed (unreviewed), 0 finding(s), 0 repaired, 5 binary not analysed",
+      "files_affected": [
+        "assets/artwork.jpg",
+        "assets/logo.jpg",
+        "assets/logo.png",
+        "assets/social-preview.jpg",
+        "assets/social-preview.png"
+      ],
+      "status": "in_progress",
+      "timestamp": 1793292780.906022,
+      "timestamp_str": "2026-10-29 19:53:00",
+      "agent": "opencode"
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge stage 4",
+      "phase_num": 3,
+      "description": "Reforge stage 4: window 12, 3 commit(s), 3 file(s) reviewed (unreviewed), 0 finding(s), 0 repaired, 1 binary not analysed",
+      "files_affected": [
+        "assets/social-preview.png"
+      ],
+      "status": "in_progress",
+      "timestamp": 1793292810.0470648,
+      "timestamp_str": "2026-10-29 19:53:30",
+      "agent": "opencode"
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge stage 5",
+      "phase_num": 3,
+      "description": "Reforge stage 5: window 15, 3 commit(s), 8 file(s) reviewed (unreviewed), 0 finding(s), 0 repaired, 2 binary not analysed",
+      "files_affected": [
+        "assets/screenshots/2026-10-28-home.png",
+        "assets/social-preview.png"
+      ],
+      "status": "in_progress",
+      "timestamp": 1793292866.5682535,
+      "timestamp_str": "2026-10-29 19:54:26",
+      "agent": "opencode"
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge stage 6",
+      "phase_num": 3,
+      "description": "Reforge stage 6: window 18, 3 commit(s), 15 file(s) reviewed (unreviewed), 0 finding(s), 0 repaired",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1793292986.7576632,
+      "timestamp_str": "2026-10-29 19:56:26",
+      "agent": "opencode"
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge stage 7",
+      "phase_num": 3,
+      "description": "Reforge stage 7: window 21, 3 commit(s), 16 file(s) reviewed (unreviewed), 0 finding(s), 0 repaired",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1793293114.6525202,
+      "timestamp_str": "2026-10-29 19:58:34",
+      "agent": "opencode"
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge stage 8",
+      "phase_num": 3,
+      "description": "Reforge stage 8: window 24, 3 commit(s), 4 file(s) reviewed (unreviewed), 0 finding(s), 0 repaired",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1793293342.6886718,
+      "timestamp_str": "2026-10-29 20:02:22",
+      "agent": "opencode"
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge stage 9",
+      "phase_num": 3,
+      "description": "Reforge stage 9: window 27, 3 commit(s), 6 file(s) reviewed (unreviewed), 0 finding(s), 0 repaired",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1793293415.9603844,
+      "timestamp_str": "2026-10-29 20:03:35",
+      "agent": "opencode"
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge stage 10",
+      "phase_num": 3,
+      "description": "Reforge stage 10: window 30, 3 commit(s), 23 file(s) reviewed (unreviewed), 0 finding(s), 0 repaired",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1793293465.3099985,
+      "timestamp_str": "2026-10-29 20:04:25",
+      "agent": "opencode"
     }
   ]
 }
