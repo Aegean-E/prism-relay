@@ -114,6 +114,7 @@ const state = {
   profileReturn: "title",
   audioUnlocked: false,
   victoryTimer: null,
+  victoryPending: false,
   profileStatusTimer: null,
 };
 
@@ -139,6 +140,10 @@ function showScreen(name) {
   if (heading) {
     heading.setAttribute("tabindex", "-1");
     heading.focus({ preventScroll: true });
+  }
+  if (name === "game" && state.victoryPending) {
+    state.victoryPending = false;
+    openVictoryModal();
   }
   if (name !== "game") {
     closeModal();
@@ -305,6 +310,7 @@ function startLevel(levelId, options = {}) {
   state.completed = false;
   state.paused = false;
   state.result = null;
+  state.victoryPending = false;
   state.preview = Boolean(options.preview);
   traceSession();
   showScreen("game");
@@ -570,8 +576,12 @@ function finishLevel() {
   audio.playVictory();
   state.victoryTimer = window.setTimeout(() => {
     state.victoryTimer = null;
-    if (state.completed && state.screen === "game" && !state.modalOpen) {
-      openVictoryModal();
+    if (state.completed && !state.modalOpen) {
+      if (state.screen === "game") {
+        openVictoryModal();
+      } else {
+        state.victoryPending = true;
+      }
     }
   }, reduceMotion ? 60 : 520);
 }
@@ -682,6 +692,7 @@ function resetCurrentLevel() {
   state.paused = false;
   state.result = null;
   state.preview = false;
+  state.victoryPending = false;
   for (const piece of state.rotatableCells) {
     piece.element.classList.remove("is-turning");
   }
@@ -799,6 +810,7 @@ function openVictoryModal() {
   if (!state.level || !state.result) {
     return;
   }
+  state.victoryPending = false;
   const result = state.result;
   const level = state.level;
   const message =
@@ -923,14 +935,17 @@ function saveCallsign(event) {
   saveProgress(storage, state.progress);
   renderProfile();
   updateTitleStats();
+  updateTopbarStatus();
   setProfileStatus("Callsign saved.");
   audio.playUi();
 }
 
 function chooseSigil(sigil) {
+  const draft = elements.profileCallsign.value;
   state.progress = updateProfile(state.progress, { sigil });
   saveProgress(storage, state.progress);
   renderProfile();
+  elements.profileCallsign.value = draft;
   setProfileStatus("Sigil updated.");
   audio.playUi();
 }
