@@ -21,6 +21,7 @@ A neon light-routing puzzle game: rotate mirrors and splitters, split beams thro
   ```bash
   npm run ui:snapshot
   ```
+- **Website build contract**: see [PLAYABLE.md](PLAYABLE.md); AegeanWorks copies only `index.html` and `src/**` into a commit-versioned play page.
 
 ### Controls
 
@@ -73,6 +74,7 @@ prism-relay/
 ├── ASSETS.md                 <- Asset/data manifest: what the license covers
 ├── assets/                   <- reviewed brand artwork and UI screenshot
 ├── README.md                  <- this living quick reference
+├── PLAYABLE.md                <- static website contract and verification
 ├── index.html                 <- semantic shell and all four UI screens
 ├── package.json               <- zero dependencies, test and snapshot commands
 ├── play.cmd                   <- Windows one-click launcher: serve and open
