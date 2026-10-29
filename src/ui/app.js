@@ -576,12 +576,13 @@ function finishLevel() {
   audio.playVictory();
   state.victoryTimer = window.setTimeout(() => {
     state.victoryTimer = null;
-    if (state.completed && !state.modalOpen) {
-      if (state.screen === "game") {
-        openVictoryModal();
-      } else {
-        state.victoryPending = true;
-      }
+    if (!state.completed) {
+      return;
+    }
+    if (state.screen === "game" && !state.modalOpen) {
+      openVictoryModal();
+    } else {
+      state.victoryPending = true;
     }
   }, reduceMotion ? 60 : 520);
 }
@@ -1189,6 +1190,10 @@ function bindEvents() {
     state.modalOpen = false;
     state.modalKind = null;
     state.paused = false;
+    if (state.victoryPending && state.screen === "game") {
+      state.victoryPending = false;
+      openVictoryModal();
+    }
   });
   window.addEventListener("keydown", handleGlobalKeydown);
   window.addEventListener("pointerdown", unlockAudio, { once: true });
