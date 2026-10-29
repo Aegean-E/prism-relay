@@ -13,16 +13,6 @@
   },
   "checkpoints": [
     {
-      "task_id": "episodes-profile-music",
-      "phase": "completed",
-      "phase_num": 5,
-      "description": "Task 'episodes-profile-music' completed successfully.",
-      "status": "completed",
-      "timestamp": 1792920726.0295465,
-      "timestamp_str": "2026-10-25 12:32:06",
-      "agent": "opencode:deepseek-v4.1-flash-free"
-    },
-    {
       "task_id": "one-click-start",
       "phase": "phase 2",
       "phase_num": 2,
@@ -101,28 +91,6 @@
       "timestamp": 1792922718.0184746,
       "timestamp_str": "2026-10-25 13:05:18",
       "agent": "opencode:deepseek-v4.1-flash-free"
-    },
-    {
-      "task_id": "reforge:run-1",
-      "phase": "reforge run",
-      "phase_num": 3,
-      "description": "run started (start=3, step=3, stop=None)",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1793292591.3613746,
-      "timestamp_str": "2026-10-29 19:49:51",
-      "agent": "opencode"
-    },
-    {
-      "task_id": "reforge:run-1",
-      "phase": "reforge stage 1",
-      "phase_num": 3,
-      "description": "Reforge stage 1: window 3, 3 commit(s), 2 file(s) reviewed (unreviewed), 0 finding(s), 0 repaired",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1793292596.5688772,
-      "timestamp_str": "2026-10-29 19:49:56",
-      "agent": "opencode"
     },
     {
       "task_id": "reforge:run-1",
@@ -267,6 +235,39 @@
       "status": "suspended",
       "timestamp": 1793295071.650376,
       "timestamp_str": "2026-10-29 20:31:11",
+      "agent": "opencode"
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge stage 12",
+      "phase_num": 3,
+      "description": "Reforge stage 12: run resumed",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1793295203.3202984,
+      "timestamp_str": "2026-10-29 20:33:23",
+      "agent": "opencode"
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge stage 13",
+      "phase_num": 3,
+      "description": "Reforge stage 13: window 37, 2 commit(s), 1 file(s) reviewed (unreviewed), 0 finding(s), 0 repaired",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1793295209.5948195,
+      "timestamp_str": "2026-10-29 20:33:29",
+      "agent": "opencode"
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge stage 13",
+      "phase_num": 3,
+      "description": "Reforge stage 13: run stopped at stage 13; resume it with `reforge resume`",
+      "files_affected": [],
+      "status": "suspended",
+      "timestamp": 1793295224.1547751,
+      "timestamp_str": "2026-10-29 20:33:44",
       "agent": "opencode"
     }
   ]
