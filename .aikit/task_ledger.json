@@ -14,39 +14,6 @@
   "checkpoints": [
     {
       "task_id": "episodes-profile-music",
-      "phase": "phase 4",
-      "phase_num": 4,
-      "description": "[5/5] Verified: 44 tests and all 4 project gates pass; Playwright walkthrough of title, episode index, profile, splitter/portal gameplay, how-to, pause, chamber/episode/finale dialogs on desktop and mobile with zero console errors; a legacy Ignition save unlocks Refraction; callsign, sigil and music settings persist; every par stays solver-backed. checklists: passed",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1792919379.7709208,
-      "timestamp_str": "2026-10-25 12:09:39",
-      "agent": "opencode:deepseek-v4.1-flash-free",
-      "handoff": {
-        "state": "14 modified files uncommitted",
-        "next": "independently reviewed screenshots and delivery commit when authorized",
-        "open": "second vision review",
-        "evidence": "aikit check 4/4, 44 tests, .review/*.png"
-      }
-    },
-    {
-      "task_id": "episodes-profile-music",
-      "phase": "phase 4",
-      "phase_num": 4,
-      "description": "[5/5] Post-review verification pass: 45 tests and all 4 project gates pass; viewport audit at 320/390/768/1440 found no horizontal overflow and zero console errors; topbar and profile controls now keep 44px coarse-pointer targets with a regression test; removed the invalid list role from the episode container; cleaned the ADR-002 trailing newline and README/licensing metadata. checklists: passed",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1792920713.5704117,
-      "timestamp_str": "2026-10-25 12:31:53",
-      "agent": "opencode:deepseek-v4.1-flash-free",
-      "handoff": {
-        "state": "16 changed paths plus the user-supplied COMMERCIAL.md",
-        "next": "complete the task, commit and push the verified tree",
-        "evidence": "aikit check 4/4, 45 tests, .review screenshots, Playwright audit"
-      }
-    },
-    {
-      "task_id": "episodes-profile-music",
       "phase": "completed",
       "phase_num": 5,
       "description": "Task 'episodes-profile-music' completed successfully.",
@@ -278,6 +245,28 @@
       "status": "in_progress",
       "timestamp": 1793294999.2972429,
       "timestamp_str": "2026-10-29 20:29:59",
+      "agent": "opencode"
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge stage 12",
+      "phase_num": 3,
+      "description": "Reforge stage 12: window 35, 1 commit(s), 0 file(s) reviewed (unreviewed), 0 finding(s), 0 repaired",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1793295057.0468452,
+      "timestamp_str": "2026-10-29 20:30:57",
+      "agent": "opencode"
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge stage 12",
+      "phase_num": 3,
+      "description": "Reforge stage 12: run stopped at stage 12; resume it with `reforge resume`",
+      "files_affected": [],
+      "status": "suspended",
+      "timestamp": 1793295071.650376,
+      "timestamp_str": "2026-10-29 20:31:11",
       "agent": "opencode"
     }
   ]
